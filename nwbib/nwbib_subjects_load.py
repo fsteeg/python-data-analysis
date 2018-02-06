@@ -2,11 +2,13 @@
 Created on Feb 2, 2018
 
 @author: fsteeg
+
+Load data from the Lobid API, store as CSV files for further processing.
 '''
 
+import csv
 import json
 import requests
-import csv
 
 
 url = 'http://lobid.org/resources/search'
@@ -45,9 +47,9 @@ def load_to_csv(params, name):
 
 def write_csv(name, data):
     with open(name, 'w', newline='') as csvfile:
-        missing_writer = csv.writer(
+        writer = csv.writer(
             csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        missing_writer.writerow(
+        writer.writerow(
             ['hbzId', 'subject', 'title', 'otherTitleInformation', 'corporateBodyForTitle'])
         for entry in data['member']:
             hbzId = entry['hbzId']
@@ -55,7 +57,7 @@ def write_csv(name, data):
             title = entry.get('title', 'NULL')
             sub = entry.get('otherTitleInformation', None)
             corp = entry.get('corporateBodyForTitle', None)
-            missing_writer.writerow(
+            writer.writerow(
                 [hbzId, subject, title, sub[0] if sub else 'NULL', corp[0] if corp else 'NULL'])
 
 

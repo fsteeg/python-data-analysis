@@ -14,15 +14,20 @@ import requests
 url = 'http://lobid.org/resources/search'
 
 train = {
+    # try to approach full NWBib set: learn from a complete, spatially
+    # restricted data set with somewhat even subject distribution, see
+    # https://test.nwbib.de/search?q=hochsauerland ('Sachgebiete' facet)
+    'q': 'hochsauerland',
     'nested': 'subject:subject.source.id:"http://purl.org/lobid/nwbib"',
     'format': 'json',
-    'size': '2000'
+    'size': '450'
 }
 test = {
+    'q': 'hochsauerland',
     'nested': 'subject:subject.source.id:"http://purl.org/lobid/nwbib"',
     'format': 'json',
-    'size': '2000',
-    'from': '2001'
+    'size': '50',
+    'from': '451'
 }
 missing = {
     'filter': 'inCollection.id:"http://lobid.org/resources/HT014176012#!"',
@@ -41,7 +46,8 @@ def main():
 def load_to_csv(params, name):
     resp = requests.get(url=url, params=params)
     data = json.loads(resp.text)
-    print("Got {} entries for {}".format(len(data['member']), name))
+    print("Got {} entries for {} (total: {})".format(
+        len(data['member']), name, data['totalItems']))
     write_csv(name, data)
 
 

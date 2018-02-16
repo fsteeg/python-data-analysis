@@ -18,13 +18,17 @@ Change into the `nwbib` directory:
 
     cd nwbib
 
-Load NWBib data from the Lobid API:
+Load sample NWBib data from the Lobid API:
 
     python3 nwbib_subjects_load.py
 
 Run classification experiment:
 
     python3 nwbib_subjects_process.py
+
+Run bulk classification (first run takes some time):
+
+    python3 nwbib_subjects_bulk.py
 
 ## License
 

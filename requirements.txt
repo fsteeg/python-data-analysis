@@ -1,3 +1,6 @@
 sklearn
 numpy
 scipy
+pandas
+matplotlib
+gensim

@@ -34,6 +34,10 @@ Run a pipeline with cross-validation and hyperparameter optimization:
 
     python3 nwbib_subjects_pipeline.py
 
+Run experiments based on paragraph vectors:
+
+    python3 nwbib_doc2vec.py
+
 ## License
 
 [Eclipse Public License 2.0](http://www.eclipse.org/legal/epl-v20.html)

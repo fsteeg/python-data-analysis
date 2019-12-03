@@ -18,13 +18,13 @@ train = {
     # restricted data set with somewhat even subject distribution, see
     # https://test.nwbib.de/search?q=hochsauerland ('Sachgebiete' facet)
     'q': 'hochsauerland',
-    'nested': 'subject:subject.source.id:"http://purl.org/lobid/nwbib"',
+    'nested': 'subject:subject.source.id:"https://nwbib.de/subjects"',
     'format': 'json',
     'size': '450'
 }
 test = {
     'q': 'hochsauerland',
-    'nested': 'subject:subject.source.id:"http://purl.org/lobid/nwbib"',
+    'nested': 'subject:subject.source.id:"https://nwbib.de/subjects"',
     'format': 'json',
     'size': '50',
     'from': '451'
@@ -70,7 +70,7 @@ def write_csv(name, data):
 def first_nwbib_subject(entry):
     for subject in entry.get('subject', []):
         source = subject.get('source', None)
-        if source and source.get('id', None) == 'http://purl.org/lobid/nwbib':
+        if source and source.get('id', None) == 'https://nwbib.de/subjects':
             return subject['id'].split('#')[1]
     return 'NULL'
 

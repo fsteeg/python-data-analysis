@@ -28,7 +28,7 @@ def main():
     print(test_corpus[:2])
 
     model = gensim.models.doc2vec.Doc2Vec(
-        vector_size=50, window=5, min_count=2, epochs=50, workers=4)
+        vector_size=20, window=5, min_count=2, epochs=20, workers=4)
     model.build_vocab(train_corpus + test_corpus)
     model.train(train_corpus, total_examples=model.corpus_count,
                 epochs=model.epochs)
@@ -84,7 +84,7 @@ def load_from_jsonl(jsonl):
             corp = entry.get('corporateBodyForTitle', None)
             vals = [title, sub[0] if sub else '', corp[0] if corp else '']
             doc = ' '.join(vals).strip()
-            yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(doc, max_len=50), [i])
+            yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(doc, max_len=20), [i])
 
 
 main()

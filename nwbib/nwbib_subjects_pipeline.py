@@ -39,12 +39,12 @@ def main():
         'vect__stop_words': [None,
                              # stop_words('german_stopwords_full.txt'),
                              stop_words('german_stopwords_plain.txt')],
-        'vect__n_features': [2 ** 18, 2 ** 19],
+        'vect__n_features': [2 ** 18], #, 2 ** 19
         'vect__ngram_range': [(1, 1), (1, 2)],
-        'clf__max_iter': [10, 100]
+        'clf__max_iter': [10] #, 100
     }
 
-    jobs = 8
+    jobs = 4
 
     # multiprocessing requires the fork to happen in a protected block:
     if __name__ == "__main__":
@@ -102,7 +102,7 @@ def load_from_jsonl(jsonl):
 def first_nwbib_subject(entry):
     for subject in entry.get('subject', []):
         source = subject.get('source', None)
-        if source and source.get('id', None) == 'http://purl.org/lobid/nwbib':
+        if source and source.get('id', None) == 'https://nwbib.de/subjects':
             return subject['id'].split('#')[1]
     return 'NULL'
 
